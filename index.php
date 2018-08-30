@@ -3,7 +3,7 @@
 require __DIR__ . '/vendor/autoload.php';
 require __DIR__ . "/auth/user.php";
 
-$user = new user();
+$user = new auth\user();
 
 if ($user->isLogged()) {
 
@@ -12,12 +12,12 @@ if ($user->isLogged()) {
     if (isset($_GET['vpn'])) {
         include "template/vpn.phtml";
     } else {
-        include "template/app.phtml";   
+        include "template/app.phtml";
     }
 } else {
 
     if (isset($_GET['login'])) {
-        $user->login();
+        header("Location: login.php");
     } else {
         include "template/login.phtml";
     }

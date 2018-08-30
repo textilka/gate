@@ -6,14 +6,14 @@ require __DIR__ . "/creds.php";
 
 session_start();
 
+use Jumbojett\OpenIDConnectClient;
+
 class user {
 
     private $oidc;
     private $auth;
 
-    use Jumbojett\OpenIDConnectClient;
-
-    function __contruct() {
+    function __construct() {
         if (is_string($_SESSION['user'])) {
 
             $this->getUserSession();
@@ -26,6 +26,7 @@ class user {
 
             $this->oidc = new OpenIDConnectClient(creds::AUTH_URL, creds::APP_ID, creds::APP_KEY);
             $this->oidc->addAuthParam(array('response_mode' => 'form_post'));
+            $this->oidc->setRedirectURL(creds::REDIRECT);
 
             $this->oidc->authenticate();
 

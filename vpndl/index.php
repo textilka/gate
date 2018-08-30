@@ -5,7 +5,7 @@ require __DIR__ . "/../auth/user.php";
 
 $admins = ["Domain admins, Enterpise admins"];
 
-$user = new user();
+$user = new auth\user();
 
 if ($user->isLogged()) {
 
