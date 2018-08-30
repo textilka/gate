@@ -1,8 +1,11 @@
 <? include "header.phtml"?>
+
+Hello <?=$_SESSION['user_name']?> from groups <?=implode(", ", json_decode($_SESSION['user_groups'], true))?> with email <?=$_SESSION['user_email']?> <br />
+
 <a href="https://brana.textilniskola.cz:5001">freya</a>
 <a href="https://brana.textilniskola.cz:5000">bobik</a>
 <a href="https://brana.textilniskola.cz/doku">doku</a>
 <a href="https://brana.textilniskola.cz:5002">heimdal</a>
-<a href="https://brana.textilniskola.cz/vpn">vpn</a>
+<a href="?vpn">vpn</a>
 <a href="https://mail.textilniskola.cz">mail</a>
 <? include "footer.phtml"?>

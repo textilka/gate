@@ -3,7 +3,7 @@
 require __DIR__ . "/../../vendor/autoload.php";
 require __DIR__ . "/../../auth/user.php";
 
-$admins = ["Domain admins, Enterpise admins"];
+$admins = ["Domain Admins", "Enterpise Admins"];
 
 $user = new auth\user();
 
