@@ -1,7 +1,7 @@
 <?php
 
-require __DIR__ . '/vendor/autoload.php';
-require __DIR__ . "/auth/user.php";
+require __DIR__ . "/../vendor/autoload.php";
+require __DIR__ . "/../auth/user.php";
 
 $user = new auth\user();
 

@@ -1,7 +1,7 @@
 <?php
 
-require __DIR__ . '/../vendor/autoload.php';
-require __DIR__ . "/../auth/user.php";
+require __DIR__ . "/../../vendor/autoload.php";
+require __DIR__ . "/../../auth/user.php";
 
 $admins = ["Domain admins, Enterpise admins"];
 
@@ -11,10 +11,10 @@ if ($user->isLogged()) {
 
     foreach ($user->getUserData()['groups'] as $group) {
         if (in_array($group, $admins)) {
-            download("admin.ovpn", "Textilní škola (admins).ovpn");
+            download(__DIR__ . "/../../vpnstore/admin.ovpn", "Textilní škola (admins).ovpn");
         }
     }
-    download("default.ovpn", "Textilní škola.ovpn");
+    download(__DIR__ . "/../../vpnstore/default.ovpn", "Textilní škola.ovpn");
 
 } else {
     header("Location: ../");
