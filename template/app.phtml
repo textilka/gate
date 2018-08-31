@@ -1,6 +1,11 @@
-<? include "header.phtml"?>
+<?php
+include "header.phtml";
 
-Hello <?=$_SESSION['user_name']?> from groups <?=implode(", ", json_decode($_SESSION['user_groups'], true))?> with email <?=$_SESSION['user_email']?> <br />
+$userData = $user->getUserData();
+?>
+
+<h1>Hello <?=$userData['name']?></h1>
+Here is the complete user array: <pre><?=print_r($userData)?></pre>
 
 <a href="https://brana.textilniskola.cz:5001">freya</a>
 <a href="https://brana.textilniskola.cz:5000">bobik</a>
@@ -8,4 +13,4 @@ Hello <?=$_SESSION['user_name']?> from groups <?=implode(", ", json_decode($_SES
 <a href="https://brana.textilniskola.cz:5002">heimdal</a>
 <a href="?vpn">vpn</a>
 <a href="https://mail.textilniskola.cz">mail</a>
-<? include "footer.phtml"?>
+<?php include "footer.phtml"?>
