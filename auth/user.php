@@ -2,7 +2,7 @@
 
 namespace auth;
 
-require __DIR__ . "/creds.php";
+require __DIR__ . "/../config/creds.php";
 
 session_start();
 

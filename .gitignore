@@ -1,4 +1,5 @@
 /vendor
-/auth/creds.php
 /composer.lock
-/vpnstore/
+/vpnstore/*
+/config/*
+/log/*
