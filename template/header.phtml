@@ -1,11 +1,49 @@
+<?php
+class user {
+    function isLogged() {
+        return true;
+    }
+    function getUserData() {
+        return [
+            "name" => "Honza Wijnhorst",
+            "groups" => [
+                "Domain Admins",
+                "Domain Users",
+                "Schema Admins",
+                "Group Policy Creator Owners"
+            ],
+            "email" => "keombre@textilniskola.cz",
+            "uid" => "TEXTILNISKOLA\\keombre"
+        ];
+    }
+}
+$user = new user;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Textilní Brána</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="icon" type="image/x-icon" href="/gate/favicon.ico" />
+    <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
+
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+    <h5 class="my-0 font-weight-normal">Textilní Brána</h5>
+    <?php if (@$back):?>
+    <a class="ml-3 btn btn-outline-primary" href="/gate">🠈 Zpět</a>
+    <?php endif;?>
+    <span class="my-0 ml-md-auto mr-md-auto font-weight-normal text-danger font-weight-bold">Tato stránka je dočasná a bude v blízké době nahrazena</span>
+    <?php if ($user->isLogged()):?>
+    <nav class="my-2 my-md-0 mr-md-3">
+        <span class="p-2 text-dark" href="#"><?=$user->getUserData()['name']?></span>
+    </nav>
+    <a class="btn btn-outline-primary" href="?logout">Odhlásit</a>
+    <?php else:?>
+    <a class="btn btn-outline-primary" href="?login">Přihlásit</a>
+    <?php endif;?>
+</div>

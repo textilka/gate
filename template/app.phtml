@@ -1,18 +1,86 @@
-<?php
-include "header.phtml";
+<?php include "header.phtml";?>
+    <div class="container px-3 py-3 pt-md-5 pb-md-4 mx-auto">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="card" style="width:20rem;margin:20px 0 24px 0">
+              <a href="https://brana.textilniskola.cz:5001" target="_blank"><img class="card-img-top" src="/gate/assets/nas.jpg" alt="image" style="width:100%"></a>
+              <div class="card-body">
+                <h4 class="card-title">Freya</h4>
+                <p class="card-text">Hlavní úložiště. Pro přístup k datům využijde webové rozhlarní, nebo <b>VPN</b>.</p>
+                <a href="https://brana.textilniskola.cz:5001" target="_blank" class="btn btn-primary">Přejít</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card" style="width:20rem;margin:20px 0 24px 0">
+              <a href="https://brana.textilniskola.cz:5000" target="_blank"><img class="card-img-top" src="/gate/assets/nas-red.png" alt="image" style="width:100%"></a>
+              <div class="card-body">
+                <h4 class="card-title">Bobík</h4>
+                <p class="card-text">Starší úložiště. Většina projektů je již přesunuta na Freyu.</p>
+                <a href="https://brana.textilniskola.cz:5000" target="_blank" class="btn btn-primary">Přejít</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card" style="width:20rem;margin:20px 0 24px 0">
+              <a href="?vpn"><img class="card-img-top" src="/gate/assets/openvpn.png" alt="image" style="width:100%"></a>
+              <div class="card-body">
+                <h4 class="card-title">VPN</h4>
+                <p class="card-text">Nejjednodušší způsob, jak pracovat na školních projektech i z domova.</p>
+                <a href="?vpn" class="btn btn-primary">Přejít</a>
+              </div>
+            </div>
+          </div>
+        </div>
 
-$userData = $user->getUserData();
-?>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="card" style="width:20rem;margin:20px 0 24px 0">
+              <a href="https://mail.textilniskola.cz" target="_blank"><img class="card-img-top" src="/gate/assets/email.png" alt="image" style="width:100%"></a>
+              <div class="card-body">
+                <h4 class="card-title">E-Mail</h4>
+                <p class="card-text">Momentálně poskytujeme dvě emailové prostředí. Pro přihlášení použijde svůj školí účet.</p>
+                <a href="https://mail.textilniskola.cz" target="_blank" class="btn btn-primary">Přejít</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card" style="width:20rem;margin:20px 0 24px 0">
+              <a href="https://brana.textilniskola.cz/doku" target="_blank"><img class="card-img-top" src="/gate/assets/dokuwiki.png" alt="image" style="width:100%"></a>
+              <div class="card-body">
+                <h4 class="card-title">Doku</h4>
+                <p class="card-text">Dokumentace celé školy. Pokud Vás zajímá, jak škola funguje, pak vše najdete zde.</p>
+                <a href="https://brana.textilniskola.cz/doku" target="_blank" class="btn btn-primary">Přejít</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card" style="width:20rem;margin:20px 0 24px 0">
+              <a href="https://brana.textilniskola.cz/3d"><img class="card-img-top" src="/gate/assets/repraplogo.png" alt="image" style="width:100%"></a>
+              <div class="card-body">
+                <h4 class="card-title">3D Tiskárna</h4>
+                <p class="card-text">Pokud si chcete nechat něco vytisknout, pak kontaktuje MgA. Ulvera.</p>
+                <a href="https://brana.textilniskola.cz/3d" class="btn btn-primary">Přejít</a>
+              </div>
+            </div>
+          </div>
+        </div>
 
-<h1>Hello <?=$userData['name']?></h1>
-Here is the complete user array: <pre><?=print_r($userData)?></pre>
-
-<a href="https://brana.textilniskola.cz:5001">freya</a>
-<a href="https://brana.textilniskola.cz:5000">bobik</a>
-<a href="https://brana.textilniskola.cz/doku">doku</a>
-<a href="https://brana.textilniskola.cz/3d">3d tiskárna</a>
-<a href="https://brana.textilniskola.cz:5002">heimdal</a>
-<a href="?vpn">vpn</a>
-<a href="https://mail.textilniskola.cz">mail</a><br />
-<a href="?logout">logout</a>
+        <?php if (in_array("Domain Admins", $user->getUserData()['groups'])):?>
+        <hr>
+        <h3 class="display-3">Administrativní část</h3>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="card" style="width:20rem;margin:20px 0 24px 0">
+              <a href="https://brana.textilniskola.cz:5002" target="_blank"><img class="card-img-top" src="/gate/assets/mikrotik.png" alt="image" style="width:100%"></a>
+              <div class="card-body">
+                <h4 class="card-title">Heimdal</h4>
+                <p class="card-text">Winbox funguje pouze přes VPN. Poslouchá z VLANu 100 i 1.</p>
+                <a href="https://brana.textilniskola.cz:5002" target="_blank" class="btn btn-primary">Přejít</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <?php endif;?>
+      </div>
 <?php include "footer.phtml"?>

@@ -10,6 +10,7 @@ if ($user->isLogged()) {
     $userData = $user->getUserData();
 
     if (isset($_GET['vpn'])) {
+        $back = true;
         include __DIR__ . "/../template/vpn.phtml";
     } else if (isset($_GET['logout'])) {
         $user->logout();
@@ -18,9 +19,10 @@ if ($user->isLogged()) {
     }
 } else {
 
-    if (isset($_GET['login'])) {
+    // hard redirect, we don't need login button
+    //if (isset($_GET['login'])) {
         header("Location: login.php");
-    } else {
-        include __DIR__ . "/../template/login.phtml";
-    }
+    //} else {
+    //    include __DIR__ . "/../template/login.phtml";
+    //}
 }
