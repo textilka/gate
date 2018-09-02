@@ -51,7 +51,7 @@ class user {
             "name"   => $this->oidc->getVerifiedClaims('name'),
             "uid"    => $this->oidc->getVerifiedClaims('unique_name'),
             "groups" => $this->oidc->getVerifiedClaims('groups'),
-            "email"  => $this->oidc->getVerifiedClaims('upn')
+            "email"  => $this->oidc->getVerifiedClaims('mail')
         ];
     }
 
