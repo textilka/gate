@@ -41,6 +41,20 @@ class user {
     }
 
     function logout() {
+
+        $context = stream_context_create([
+            'http' => [
+                'header' => "Cookie: " . http_build_query($_COOKIE, '', '; ') . "\r\n"
+            ],
+            "ssl" => [
+                "verify_peer" => false,
+                "verify_peer_name" => false,
+            ]
+        ]);
+
+        // freya logout
+        file_get_contents("https://brana.textilniskola.cz:5001//webapi/auth.cgi?api=SYNO.API.Auth&version=3&method=logout", false, $context);
+
         if (isset($_COOKIE[session_name()]))
             setcookie( session_name(), "", time()-3600, "/");
         $_SESSION = array();
