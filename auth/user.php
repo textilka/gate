@@ -53,7 +53,7 @@ class user {
         ]);
 
         // freya logout
-        file_get_contents("https://brana.textilniskola.cz:5001//webapi/auth.cgi?api=SYNO.API.Auth&version=3&method=logout", false, $context);
+        file_get_contents("https://10.0.10.20:5001//webapi/auth.cgi?api=SYNO.API.Auth&version=3&method=logout", false, $context);
 
         if (isset($_COOKIE[session_name()]))
             setcookie( session_name(), "", time()-3600, "/");
