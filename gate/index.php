@@ -19,12 +19,13 @@ if ($user->isLogged()) {
         $user->logout();
 
     } else if (isset($_GET['api'])) {
+        sleep(1);
         if ($_GET['api'] == "load") {
             foreach ($user->getUserData()['groups'] as $group) {
                 if (in_array($group, $admins)) {
                     $data = [
                         "data" => [
-                            "cpu" => sys_getloadavg(),
+                            "cpu" => cpu_load(),
                             "mem" => getSystemMemInfo(),
                         ],
                         "status" => "success"
@@ -53,4 +54,8 @@ function getSystemMemInfo() {
         $meminfo[$key] = trim($val);
     }
     return $meminfo;
+}
+
+function cpu_load() {
+    return exec("vmstat 1 2|tail -1|awk '{print 100-$15}'");
 }
