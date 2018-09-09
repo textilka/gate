@@ -13,6 +13,8 @@ class user {
     private $oidc;
     private $auth;
 
+    private $admin_groups = ["Domain Admins", "Enterpise Admins"];
+
     function __construct() {
         if (is_string($_SESSION['user'])) {
 
@@ -34,6 +36,15 @@ class user {
             $this->setUserSession();
             $this->auth = true;
         }
+    }
+
+    function isAdmin() {
+        foreach ($user->getUserData()['groups'] as $group) {
+            if (in_array($group, $admins)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     function isLogged() {

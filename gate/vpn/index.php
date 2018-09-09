@@ -3,16 +3,14 @@
 require __DIR__ . "/../../vendor/autoload.php";
 require __DIR__ . "/../../auth/user.php";
 
-$admins = ["Domain Admins", "Enterpise Admins"];
+
 
 $user = new auth\user();
 
 if ($user->isLogged()) {
 
-    foreach ($user->getUserData()['groups'] as $group) {
-        if (in_array($group, $admins)) {
-            download(__DIR__ . "/../../vpnstore/admin.ovpn", "Textilní škola (admins).ovpn");
-        }
+    if ($user->isAdmin()) {
+        download(__DIR__ . "/../../vpnstore/admin.ovpn", "Textilní škola (admins).ovpn");
     }
     download(__DIR__ . "/../../vpnstore/default.ovpn", "Textilní škola.ovpn");
 

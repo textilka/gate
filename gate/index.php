@@ -3,8 +3,6 @@
 require __DIR__ . "/../vendor/autoload.php";
 require __DIR__ . "/../auth/user.php";
 
-$admins = ["Domain Admins", "Enterpise Admins"];
-
 $user = new auth\user();
 
 if ($user->isLogged()) {
@@ -21,17 +19,15 @@ if ($user->isLogged()) {
     } else if (isset($_GET['api'])) {
         sleep(1);
         if ($_GET['api'] == "load") {
-            foreach ($user->getUserData()['groups'] as $group) {
-                if (in_array($group, $admins)) {
-                    $data = [
-                        "data" => [
-                            "cpu" => cpu_load(),
-                            "mem" => mem_used(),
-                        ],
-                        "status" => "success"
-                    ];
-                    exit(json_encode(array_merge($data)));
-                }
+            if ($user->isAdmin()) {
+                $data = [
+                    "data" => [
+                        "cpu" => cpu_load(),
+                        "mem" => mem_used(),
+                    ],
+                    "status" => "success"
+                ];
+                exit(json_encode(array_merge($data)));
             }
             exit(json_encode(["status" => "error"]));
         }
@@ -57,9 +53,9 @@ function getSystemMemInfo() {
 }
 
 function mem_used() {
-    return exec("free|grep 'Mem:'|awk '{print $3/$2*100}'");
+    return intval(exec("free|grep 'Mem:'|awk '{print $3/$2*100}'"));
 }
 
 function cpu_load() {
-    return exec("vmstat 1 2|tail -1|awk '{print 100-$15}'");
+    return intval(exec("vmstat 1 2|tail -1|awk '{print 100-$15}'"));
 }
