@@ -26,7 +26,7 @@ if ($user->isLogged()) {
                     $data = [
                         "data" => [
                             "cpu" => cpu_load(),
-                            "mem" => getSystemMemInfo(),
+                            "mem" => mem_used(),
                         ],
                         "status" => "success"
                     ];
@@ -54,6 +54,10 @@ function getSystemMemInfo() {
         $meminfo[$key] = trim($val);
     }
     return $meminfo;
+}
+
+function mem_used() {
+    return exec("free|grep 'Mem:'|awk '{print $3/$2*100}'");
 }
 
 function cpu_load() {
