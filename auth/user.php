@@ -39,7 +39,7 @@ class user {
     }
 
     function isAdmin() {
-        foreach ($user->getUserData()['groups'] as $group) {
+        foreach ($this->getUserData()['groups'] as $group) {
             if (in_array($group, $admins)) {
                 return true;
             }
