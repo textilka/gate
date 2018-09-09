@@ -8,11 +8,18 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="icon" type="image/x-icon" href="/gate/favicon.ico" />
     <link rel="stylesheet" href="../assets/style.css">
+    <script src="../assets/script.js"></script>
 </head>
 <body>
 
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
     <h5 class="my-0 font-weight-normal">Textilní Brána</h5>
+    <?php if ($user->isAdmin()):?>
+    <div class="progress" style="left: 0;height: 2px;position: absolute;top: 0;width: 100%;">
+        <div class="progress-bar" role="progressbar" style="width: 0%;" id="progress_one"></div>
+        <div class="progress-bar" role="progressbar" style="width: 0%;" id="progress_two"></div>
+    </div>
+    <?php endif;?>
     <?php if (@$back):?>
     <a class="ml-3 btn btn-outline-primary" href="/gate">🠈 Zpět</a>
     <?php endif;?>
