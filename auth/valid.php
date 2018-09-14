@@ -8,7 +8,7 @@ require __DIR__ . "/user.php";
 $user = new user();
 
 if ($user->isLogged()) {
-    if (is_string($_GET['groups'])) {
+    if (is_string(@$_GET['groups'])) {
         $min_groups = explode(",", urldecode($_GET['groups']));
         foreach ($user->getUserData()['groups'] as $group) {
             if (in_array($group, $min_groups)) {
