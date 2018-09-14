@@ -37,5 +37,5 @@ $('#modal-closeup').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget)
     var link = button.data('imagelink')
     var modal = $(this)
-    modal.find('.image-closeup').attr('src', link)
+    modal.find('#image-closeup').attr('src', link)
 })
