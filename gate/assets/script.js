@@ -39,3 +39,9 @@ $('#modal-closeup').on('show.bs.modal', function (event) {
     var modal = $(this)
     modal.find('#image-closeup').attr('src', link)
 })
+
+$(document).on("click", ".passImageInfo", function () {
+    var id = $(this).attr('src');
+    $(".modal-body").children('img').attr('src', id)
+    $('#image-closeup').modal('handleUpdate')
+});
