@@ -3,19 +3,21 @@
 include "header.phtml";
 
 function imageHTML(string $imageText, int $id, int $indent = 0, string $imageLink = null): string {
-	
+  
+  $SEP = "\t";
+
 	if (is_null($imageLink))
 		$imageLink = "../gate/assets/vpnWinGuide/obr$id.png";
 	
-	$sI = str_repeat("\t", $indent);
+	$sI = str_repeat($SEP, $indent);
 	return <<<EOL
 $sI<p>$imageText
-$sI$sI<a href="#collapseObr$id" data-toggle="collapse">(obrázek)</a>
+$sI$SEP<a href="#collapseObr$id" data-toggle="collapse">(obrázek)</a>
 $sI</p>
 $sI<div id="collapseObr$id" class="collapse">
-$sI$sI<button type="button" class="myShit" data-toggle="modal" data-target="#image-closeup" data-id="$imageLink"> 
-$sI$sI$sI<img class="img-responsive" src="$imageLink" alt="" />
-$sI$sI</button>
+$sI$SEP<button type="button" class="myShit" data-toggle="modal" data-target="#image-closeup" data-id="$imageLink"> 
+$sI$SEP$SEP<img class="img-responsive" src="$imageLink" alt="" />
+$sI$SEP</button>
 $sI</div>
 EOL;
 }
