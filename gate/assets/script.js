@@ -35,7 +35,7 @@ if (document.getElementById('progress_one') && document.getElementById('progress
 
 $('#modal-closeup').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget)
-    var recipient = button.data('imagelink')
+    var link = button.data('imagelink')
     var modal = $(this)
-    modal.find('.image-closeup').src(recipient)
+    modal.find('.image-closeup').attr('src', link)
 })
