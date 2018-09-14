@@ -5,7 +5,13 @@ include "header.phtml";
 const INDENT_REPEAT = 2;
 const SEP = " ";
 
-function imageHTML(string $imageText, int $id, string $imageLink = null, int $indent = null): string {
+$imageCounter = 1;
+
+function imageHTML(string $imageText, int $id = null, string $imageLink = null, int $indent = null): string {
+  global $imageCounter;
+
+  if (is_null($id))
+    $id = $imageCounter;
 
   if (is_null($imageLink))
     $imageLink = "../gate/assets/vpnWinGuide/obr$id.png";
@@ -18,6 +24,9 @@ function imageHTML(string $imageText, int $id, string $imageLink = null, int $in
 
   $SEP = str_repeat(SEP, INDENT_REPEAT);
   $sI = str_repeat($SEP, $indent);
+  
+  $imageCounter = $id + 1;
+
   return <<<EOL
 <p>$imageText
 $sI$SEP<a href="#collapseObr$id" data-toggle="collapse">(obrázek)</a>
@@ -51,18 +60,18 @@ EOL;
         V internetovém prohlížeči otevřete stránku <a href="https://openvpn.net/index.php/open-source/downloads.html">stahování OpenVPN</a>
       </li>
       <li>
-        <?=imageHTML("Na této stránce klikněte na odkaz pro stažení instalačního souboru pro Windows (končí .exe)", 1)?>
+        <?=imageHTML("Na této stránce klikněte na odkaz pro stažení instalačního souboru pro Windows (končí .exe)")?>
       </li>
       <li>Otevřete nově stažený program
         <ul>
           <li>
-            <?=imageHTML("Chrome", 2)?>
+            <?=imageHTML("Chrome")?>
           </li>
           <li>
-            <?=imageHTML("Mozilla", 3)?>
+            <?=imageHTML("Mozilla")?>
           </li>
           <li>
-            <?=imageHTML("Edge", 4)?>
+            <?=imageHTML("Edge")?>
           </li>
     </ol>
 </div>
