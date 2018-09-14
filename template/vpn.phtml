@@ -5,13 +5,7 @@ include "header.phtml";
 const INDENT_REPEAT = 2;
 const SEP = " ";
 
-$imageCounter = 1;
-
 function imageHTML(string $imageText, int $id = null, string $imageLink = null, int $indent = null): string {
-  global $imageCounter;
-
-  if (is_null($id))
-    $id = $imageCounter;
 
   if (is_null($imageLink))
     $imageLink = "../gate/assets/vpnWinGuide/obr$id.png";
@@ -24,69 +18,113 @@ function imageHTML(string $imageText, int $id = null, string $imageLink = null, 
 
   $SEP = str_repeat(SEP, INDENT_REPEAT);
   $sI = str_repeat($SEP, $indent);
-  
-  $imageCounter = $id + 1;
 
   return <<<EOL
-<p>
-$sI$SEP<span>$imageText</span>
-$sI$SEP<a href="#collapseObr$id" data-toggle="collapse">(obrázek)</a>
-$sI</p>
-$sI<div id="collapseObr$id" class="collapse">
-$sI$SEP<button type="button" class="myShit" data-toggle="modal" data-target="#modal-closeup" data-imagelink="$imageLink"> 
-$sI$SEP$SEP<img class="img-responsive" src="$imageLink" alt="" />
-$sI$SEP</button>
-$sI</div>
-
+$SEP<p>
+$sI$SEP$SEP<span>$imageText</span>
+$sI$SEP$SEP<a href="#collapseObr$id" data-toggle="collapse">(obrázek)</a></p>
+$sI$SEP<div id="collapseObr$id" class="collapse">
+$sI$SEP$SEP<img class="img-responsive myShit" src="$imageLink" data-target="#image-closeup" data-toggle="modal" /></button></div>
 EOL;
 }
 ?>
 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="guide.js"></script>
+
 <div class="container px-3 py-3 pt-md-5 pb-md-4 mx-auto">
-  <div class="mb-5">
-    <h3 class="display-3">Připojení k VPN</h3>
-    <h4><small>Není to až tak těžké, jen někdo musí napsat ten návod.</small></h4>
-    <!--<img src="../gate/assets/vpnWinGuide/obr1.png">-->
-  </div>
-  <span>Konfigurace je ke stažení <a href="/gate/vpn"><b>zde</b></a>.</span>
+    <div class="mb-5">
+        <h3 class="display-3">Připojení k VPN</h3>
+        <h4><small>Není to až tak těžké, jen někdo musí napsat ten návod.</small></h4>
+        <!--<img src="../gate/assets/vpnWinGuide/obr1.png">-->
+    </div>
+
+    Konfigurace je ke stažení <a href="/gate/vpn"><b>zde</b></a>.
 </div>
 
+<div class="container"> 
+<h4> INSTALACE </h4>
 <div class="container">
-  <h4>1: Nainstujte program OpenVPN</h4>
-  <ol>
-    <li>
-      V internetovém prohlížeči otevřete stránku <a href="https://openvpn.net/index.php/open-source/downloads.html">stahování OpenVPN</a>
-    </li>
-    <li>
-      <?=imageHTML("Na této stránce klikněte na odkaz pro stažení instalačního souboru pro Windows (končí .exe)")?>
-    </li>
-    <li>Otevřete nově stažený program
-      <ul>
-        <li>
-          <?=imageHTML("Chrome")?>
-        </li>
-        <li>
-          <?=imageHTML("Mozilla")?>
-        </li>
-        <li>
-          <?=imageHTML("Edge")?>
-        </li>
-      </ul>
-    </li>
-  </ol>
+  <h5>1: Nainstujte program OpenVPN</h5>
+    <ol>
+      <li>V internetovém prohlížeči otevřete stránku <a href="https://openvpn.net/index.php/open-source/downloads.html">stahování OpenVPN</a></li>
+      
+      <li>
+      <?=imageHTML("Na této stránce klikněte na odkaz pro stažení instalačního souboru pro Windows (končí .exe)", 1);?></li>
+          
+      <li>Otevřete nově stažený program. Pokud na vás vykočila tabulka s ověřením, klikněte na ANO
+          <a href="#collapseOpenDownloaded" data-toggle="collapse">(Jak?)</a>
+          <div id="collapseOpenDownloaded" class="collapse">
+            <ul>
+              <li>
+              <?=imageHTML("Chrome", 2, 2)?></li>
+              
+              <li>Mozilla 
+                <a href="#collapseMozilla" data-toggle="collapse">(obrázek)</a>
+                <div id="collapseMozilla" class="collapse">
+                  <p><img class="img-responsive myShit" src="../gate/assets/vpnWinGuide/obr3.png" data-target="#image-closeup" data-toggle="modal" /></button></p>
+                  <p><img class="img-responsive myShit" src="../gate/assets/vpnWinGuide/obr6.png" data-target="#image-closeup" data-toggle="modal" /></button></p></div></li>
+              
+              <li>
+              <?=imageHTML("Edge", 4)?></li></ul>
+          </div>
+              
+
+      <li>Projděte instalátorem beze změn (můžete změnit Destination Folder, pokud je to nezbytné)
+        <a href="#collapseHowToInstall" data-toggle="collapse">(Jak?)</a>
+        <div id="collapseHowToInstall" class="collapse">
+          <ol>
+            <li>
+              <img class="img-responsive myShit" src="../gate/assets/vpnWinGuide/obr7.png" data-target="#image-closeup" data-toggle="modal" /></button></li>
+            <li>
+              <img class="img-responsive myShit" src="../gate/assets/vpnWinGuide/obr8.png" data-target="#image-closeup" data-toggle="modal" /></button></li>
+            <li>
+              <img class="img-responsive myShit" src="../gate/assets/vpnWinGuide/obr9.png" data-target="#image-closeup" data-toggle="modal" /></button></li>
+            <li>
+              <img class="img-responsive myShit" src="../gate/assets/vpnWinGuide/obr10.png" data-target="#image-closeup" data-toggle="modal" /></button></li>
+            <li>
+              <img class="img-responsive myShit" src="../gate/assets/vpnWinGuide/obr11.png" data-target="#image-closeup" data-toggle="modal" /></button></li></ol></div></li></ol>
+              
+
+  <h5>Stáhněte si svou konfiguraci s klíčem ze stránek školy</h5>
+    <ol>
+      <li>Přejděte na stránky brana.textilniskola.cz</li>
+
+      <li>
+        <?=imageHTML("Přihlašte se pomocí svých školních přihlašovacích údajů", 12)?></li>
+
+      <li>
+        <?=imageHTML("Klikněte na sekci VPN", 13)?></li>
+
+      <li>Stáhněte konfiguraci kliknutím na příslušný odkaz</li>
+
+      <li>Tento soubor si uložte do Stažených souborů
+        <a href="#collapseHowToSaveToDownloads" data-toggle="collapse">(Jak?)</a>
+        <div id="collapseHowToSaveToDownloads" class="collapse">
+          <ol>
+            <li>Mozilla:
+              <img class="img-responsive myShit" src="../gate/assets/vpnWinGuide/obr3.png" data-target="#image-closeup" data-toggle="modal" /></button>
+
+
+
+
 </div>
 
+ <!-- The Modal -->
 <div class="container">
-  <!-- The Modal -->
-  <div class="modal modal-flex" id="modal-closeup">
+  <div class="modal modal-flex" id="image-closeup">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-body">
-          <img id="image-closeup" width='100%' height='100%'/>
+          <!-- without resizing modal
+            <img src="" width='100%' height='100%'/>-->
+          <img src=""/>
         </div>
       </div>
     </div>
   </div>
   
 </div>
+
 <?php include "footer.phtml"?>
