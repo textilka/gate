@@ -32,3 +32,10 @@ if (document.getElementById('progress_one') && document.getElementById('progress
     load(showProgress, "?api=load")
     setInterval(function() {load(showProgress, "?api=load")}, 3000);
 }
+
+$('#modal-closeup').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget)
+    var recipient = button.data('imagelink')
+    var modal = $(this)
+    modal.find('.image-closeup').src(recipient)
+})
