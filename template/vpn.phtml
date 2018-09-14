@@ -33,7 +33,7 @@ $sI$SEP<span>$imageText</span>
 $sI$SEP<a href="#collapseObr$id" data-toggle="collapse">(obrázek)</a>
 $sI</p>
 $sI<div id="collapseObr$id" class="collapse">
-$sI$SEP<button type="button" class="myShit" data-toggle="modal" data-target="#image-closeup" data-id="$imageLink"> 
+$sI$SEP<button type="button" class="myShit" data-toggle="modal" data-target="#image-closeup" data-imagelink="$imageLink"> 
 $sI$SEP$SEP<img class="img-responsive" src="$imageLink" alt="" />
 $sI$SEP</button>
 $sI</div>
@@ -41,9 +41,6 @@ $sI</div>
 EOL;
 }
 ?>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="guide.js"></script>
 
 <div class="container px-3 py-3 pt-md-5 pb-md-4 mx-auto">
   <div class="mb-5">
@@ -81,11 +78,11 @@ EOL;
 
 <div class="container">
   <!-- The Modal -->
-  <div class="modal modal-flex" id="image-closeup">
+  <div class="modal modal-flex" id="modal-closeup">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-body">
-          <img src="" width='100%' height='100%'/>
+          <img class="image-closeup" width='100%' height='100%'/>
         </div>
       </div>
     </div>
@@ -93,4 +90,5 @@ EOL;
   
 </div>
 
+<script src="assets/vpn.js"></script>
 <?php include "footer.phtml"?>
