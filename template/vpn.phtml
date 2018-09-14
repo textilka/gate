@@ -1,4 +1,25 @@
-<?php include "header.phtml"?>
+<?php
+
+include "header.phtml";
+
+function imageHTML(string $imageText, int $id, int $indent = 0, string $imageLink = null): string {
+	
+	if (is_null($imageLink))
+		$imageLink = "../gate/assets/vpnWinGuide/obr$id.png";
+	
+	$sI = str_repeat("\t", $indent);
+	return <<<EOL
+$sI<p>$imageText
+$sI$sI<a href="#collapseObr$id" data-toggle="collapse">(obrázek)</a>
+$sI</p>
+$sI<div id="collapseObr$id" class="collapse">
+$sI$sI<button type="button" class="myShit" data-toggle="modal" data-target="#image-closeup" data-id="$imageLink"> 
+$sI$sI$sI<img class="img-responsive" src="$imageLink" alt="" />
+$sI$sI</button>
+$sI</div>
+EOL;
+}
+?>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="guide.js"></script>
@@ -24,33 +45,41 @@
         V internetovém prohlížeči otevřete stránku <a href="https://openvpn.net/index.php/open-source/downloads.html">stahování OpenVPN</a></li>
       
       <li>
-        <p>Na této stránce klikněte na odkaz pro stažení instalačního souboru pro Windows (končí .exe) 
+	  <?=imageHTML("Na této stránce klikněte na odkaz pro stažení instalačního souboru pro Windows (končí .exe)", 1, 2);?>
+        <!--p>Na této stránce klikněte na odkaz pro stažení instalačního souboru pro Windows (končí .exe) 
           <a href= "#collapseObr1" data-toggle="collapse">(obrázek)</a></p>
         <div id="collapseObr1" class="collapse">
           <button type="button" class="myShit" data-toggle="modal" data-target="#image-closeup" data-id="../gate/assets/vpnWinGuide/obr1.png"> 
-            <img class="img-responsive" src="../gate/assets/vpnWinGuide/obr1.png" alt="" /></button></div></li>
+            <img class="img-responsive" src="../gate/assets/vpnWinGuide/obr1.png" alt="" /></button></div-->
+	  </li>
           
       <li>Otevřete nově stažený program
         <ul>
           <li>
-            <a href= "#collapseObr2" data-toggle="collapse" role="button">Chrome</a>
+		  <?=imageHTML("Chrome", 2, 2)?>
+            <!--a href= "#collapseObr2" data-toggle="collapse" role="button">Chrome</a>
             <div id="collapseObr2" class="collapse">
               <button type="button" class="myShit" data-toggle="modal" data-target="#image-closeup" data-id="../gate/assets/vpnWinGuide/obr2.png"> 
-                <img class="img-responsive" src="../gate/assets/vpnWinGuide/obr2.png" alt="" /></button></div></li>
+                <img class="img-responsive" src="../gate/assets/vpnWinGuide/obr2.png" alt="" /></button></div-->
+				</li>
           
           <li>
-            <a href="#collapseMozilla" data-toggle="collapse">Mozilla</a>
+		  <?=imageHTML("Mozilla", 3, 2)?>
+            <!--a href="#collapseMozilla" data-toggle="collapse">Mozilla</a>
             <div id="collapseMozilla" class="collapse">
               <p><button type="button" class="myShit" data-toggle="modal" data-target="#image-closeup" data-id="../gate/assets/vpnWinGuide/obr3.png">
                 <img class="img-responsive" src="../gate/assets/vpnWinGuide/obr3.png" alt="" /></button></p>
               <p><button type="button" class="myShit" data-toggle="modal" data-target="#image-closeup" data-id="../gate/assets/vpnWinGuide/obr4.png">
-                <img class="img-responsive" src="../gate/assets/vpnWinGuide/obr4.png" alt="" /></button></p></div></li>
+                <img class="img-responsive" src="../gate/assets/vpnWinGuide/obr4.png" alt="" /></button></p></div-->
+		  </li>
 
           <li>
-            <a href= "#collapseObr4" data-toggle="collapse" role="button">Edge</a>
+		  <?=imageHTML("Edge", 4, 2)?>
+            <!--a href= "#collapseObr4" data-toggle="collapse" role="button">Edge</a>
               <div id="collapseObr4" class="collapse">
                 <button type="button" class="myShit" data-toggle="modal" data-target="#image-closeup" data-id="../gate/assets/vpnWinGuide/obr4.png"> 
-                  <img class="img-responsive" src="../gate/assets/vpnWinGuide/obr4.png" alt="" /></button></div></li>
+                  <img class="img-responsive" src="../gate/assets/vpnWinGuide/obr4.png" alt="" /></button></div-->
+				  </li>
 
             
               
