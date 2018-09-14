@@ -5,21 +5,23 @@ include "header.phtml";
 const INDENT_REPEAT = 2;
 const SEP = " ";
 
-function imageHTML(string $imageText, int $id = null, string $imageLink = null, int $indent = null): string {
+function imageHTML(string $imageText, int $id = null, string $imageLink = null, int $indent = null): string
+{
 
-  if (is_null($imageLink))
-    $imageLink = "../gate/assets/vpnWinGuide/obr$id.png";
-  
-  if (is_null($indent)) {
-    // try to autodetermine current indent level
-    $callLineNum = debug_backtrace()[0]['line'];
-    $indent = strlen(explode("<?", file(__FILE__)[$callLineNum-1])[0])/INDENT_REPEAT;
-  }
+    if (is_null($imageLink)) {
+        $imageLink = "../gate/assets/vpnWinGuide/obr$id.png";
+    }
 
-  $SEP = str_repeat(SEP, INDENT_REPEAT);
-  $sI = str_repeat($SEP, $indent);
+    if (is_null($indent)) {
+        // try to autodetermine current indent level
+        $callLineNum = debug_backtrace()[0]['line'];
+        $indent = strlen(explode("<?", file(__FILE__)[$callLineNum - 1])[0]) / INDENT_REPEAT;
+    }
 
-  return <<<EOL
+    $SEP = str_repeat(SEP, INDENT_REPEAT);
+    $sI = str_repeat($SEP, $indent);
+
+    return <<<EOL
 $SEP<p>
 $sI$SEP$SEP<span>$imageText</span>
 $sI$SEP$SEP<a href="#collapseObr$id" data-toggle="collapse">(obrázek)</a></p>
@@ -39,32 +41,32 @@ EOL;
     Konfigurace je ke stažení <a href="/gate/vpn"><b>zde</b></a>.
 </div>
 
-<div class="container"> 
-<h4> INSTALACE </h4>
-  <h5>1: Nainstujte program OpenVPN</h5>
+<div class="container">
+  <h4> INSTALACE </h4>
+  <h5>a: Nainstujte program OpenVPN</h5>
   <ol>
-    <li>V internetovém prohlížeči otevřete stránku <a href="https://openvpn.net/index.php/open-source/downloads.html">stahování OpenVPN</a></li>
-    
+    <li>V internetovém prohlížeči otevřete stránku <a href="https://openvpn.net/index.php/open-source/downloads.html" target="_blank">stahování OpenVPN</a></li>
+
     <li>
     <?=imageHTML("Na této stránce klikněte na odkaz pro stažení instalačního souboru pro Windows (končí .exe)", 1);?></li>
-        
+
     <li>Otevřete nově stažený program. Pokud na vás vykočila tabulka s ověřením, klikněte na ANO
         <a href="#collapseOpenDownloaded" data-toggle="collapse">(Jak?)</a>
         <div id="collapseOpenDownloaded" class="collapse">
           <ul>
             <li>
             <?=imageHTML("Chrome", 2)?></li>
-            
-            <li>Mozilla 
+
+            <li>Mozilla
               <a href="#collapseMozilla" data-toggle="collapse">(obrázek)</a>
               <div id="collapseMozilla" class="collapse">
                 <p><img class="img-responsive passImageInfo" src="../gate/assets/vpnWinGuide/obr3.png" data-target="#image-closeup" data-toggle="modal" /></p>
                 <p><img class="img-responsive passImageInfo" src="../gate/assets/vpnWinGuide/obr6.png" data-target="#image-closeup" data-toggle="modal" /></p></div></li>
-            
+
             <li>
             <?=imageHTML("Edge", 4)?></li></ul>
         </div>
-            
+
 
     <li>Projděte instalátorem beze změn (můžete změnit Destination Folder, pokud je to nezbytné)
       <a href="#collapseHowToInstall" data-toggle="collapse">(Jak?)</a>
@@ -84,9 +86,9 @@ EOL;
       </div>
     </li>
   </ol>
-              
 
-  <h5>Stáhněte si svou konfiguraci s klíčem ze stránek školy</h5>
+
+  <h5>b: Stáhněte si svou konfiguraci s klíčem ze stránek školy</h5>
   <ol>
     <li>Přejděte na stránky brana.textilniskola.cz</li>
 
@@ -103,14 +105,56 @@ EOL;
       <div id="collapseHowToSaveToDownloads" class="collapse">
         <ol>
           <li>Mozilla:
-            <img class="img-responsive passImageInfo" src="../gate/assets/vpnWinGuide/obr3.png" data-target="#image-closeup" data-toggle="modal" />
+            <p><img class="img-responsive passImageInfo" src="../gate/assets/vpnWinGuide/obr15.png" data-target="#image-closeup" data-toggle="modal" /></p>
+          </li>
+          <li>Edge:
+            <p><img class="img-responsive passImageInfo" src="../gate/assets/vpnWinGuide/obr16.png" data-target="#image-closeup" data-toggle="modal" /></p>
           </li>
         </ol>
       </div>
     </li>
   </ol>
 
+  <h5>c: Importujte konfiguraci do OpenVPN</h5>
+  <ol>
+    <li id="runShortcut">
+      <?=imageHTML("Spusťte zástupce na ploše, nebo běžte do menu Start a OpenVPN spusťte odtamtud", 17)?></li>
+    
+    <li id="context2">
+      <?=imageHTML("Po spuštění zástupce běžte do pravého dolního rohu obrazovky, kde najdete ikonu běžícího programu", 18)?></li>
 
+    <li id="context3">Klikněte na zástupce pravým tlačítkem myši</li>
+
+    <li>
+      <?=imageHTML("Zvolte volbu Import souboru konfigurace", 19)?></li>
+
+    <li>
+      <?=imageHTML("Najděte stažený soubor konfigurace (pravděpodobně ve Stažených souborech) a otevřete jej",20)?></li>
+
+    <li>
+      <?=imageHTML("Zobrazí se vám tabulka potvrzující úspěšný import konfigurace.", 21)?></li>
+  </ol>
+</div>
+
+<div class="container">
+  <h4> POUŽITÍ </h4>
+  <ol>
+    <li>Spusťte aplikaci OpenVPN GUI (Jak popsáno v sekci Instalace <a href="#runShortcut">c1</a>)</li>
+    
+    <li>Běžte do kontextového menu aplikace (Jak popsáno v sekcích Instalace <a href="#context2">c2</a>, <a href="#context3">c3</a>)</li>
+    
+    <li>
+      <?=imageHTML("Klikněte na připojit", 22)?></li>
+    
+    <li>
+      <?=imageHTML("Při prvním spuštění budete muset zadat své školní přihlašovací údaje", 23)?></li>
+
+    <li>
+      <?=imageHTML("Měla by se vám zobrazit informace o úspěšném připojení a přiřazení vaší IP adresy", 24)?></li>
+
+    <li>
+      <?=imageHTML("Pro odpojení ze školní VPN po skončení práce zvolte v kontextovém menu volbu Odpojit", 25)?></li>
+  </ol>
 </div>
 
  <!-- The Modal -->
@@ -126,7 +170,7 @@ EOL;
       </div>
     </div>
   </div>
-  
+
 </div>
 
 <?php include "footer.phtml"?>
