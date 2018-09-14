@@ -33,15 +33,16 @@ if (document.getElementById('progress_one') && document.getElementById('progress
     setInterval(function() {load(showProgress, "?api=load")}, 3000);
 }
 
-$('#modal-closeup').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget)
-    var link = button.data('imagelink')
+$('#image-closeup').on('show.bs.modal', function (event) {
+    var image = $(event.relatedTarget)
+    var link = image.attr('src')
     var modal = $(this)
-    modal.find('#image-closeup').attr('src', link)
+    modal.find('img').attr('src', link)
 })
 
-$(document).on("click", ".passImageInfo", function () {
+/*$(document).on("click", ".passImageInfo", function () {
     var id = $(this).attr('src');
     $(".modal-body").children('img').attr('src', id)
     $('#image-closeup').modal('handleUpdate')
 });
+*/
