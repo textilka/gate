@@ -2,16 +2,24 @@
 
 include "header.phtml";
 
-function imageHTML(string $imageText, int $id, int $indent = 0, string $imageLink = null): string {
-  
-  $SEP = "\t";
+const INDENT_REPEAT = 2;
+const SEP = " ";
 
-	if (is_null($imageLink))
-		$imageLink = "../gate/assets/vpnWinGuide/obr$id.png";
-	
-	$sI = str_repeat($SEP, $indent);
-	return <<<EOL
-$sI<p>$imageText
+function imageHTML(string $imageText, int $id, string $imageLink = null, int $indent = null): string {
+
+  if (is_null($imageLink))
+    $imageLink = "../gate/assets/vpnWinGuide/obr$id.png";
+  
+  if (is_null($indent)) {
+    // try to autodetermine current indent level
+    $callLineNum = debug_backtrace()[0]['line'];
+    $indent = strlen(explode("<?", file(__FILE__)[$callLineNum-1])[0])/INDENT_REPEAT;
+  }
+
+  $SEP = str_repeat(SEP, INDENT_REPEAT);
+  $sI = str_repeat($SEP, $indent);
+  return <<<EOL
+<p>$imageText
 $sI$SEP<a href="#collapseObr$id" data-toggle="collapse">(obrázek)</a>
 $sI</p>
 $sI<div id="collapseObr$id" class="collapse">
@@ -19,6 +27,7 @@ $sI$SEP<button type="button" class="myShit" data-toggle="modal" data-target="#im
 $sI$SEP$SEP<img class="img-responsive" src="$imageLink" alt="" />
 $sI$SEP</button>
 $sI</div>
+
 EOL;
 }
 ?>
@@ -27,65 +36,34 @@ EOL;
 <script src="guide.js"></script>
 
 <div class="container px-3 py-3 pt-md-5 pb-md-4 mx-auto">
-    <div class="mb-5">
-        <h3 class="display-3">Připojení k VPN</h3>
-        <h4><small>Není to až tak těžké, jen někdo musí napsat ten návod.</small></h4>
-        <!--<img src="../gate/assets/vpnWinGuide/obr1.png">-->
-    </div>
-
-    
-      
-
-
-    Konfigurace je ke stažení <a href="/gate/vpn"><b>zde</b></a>.
+  <div class="mb-5">
+    <h3 class="display-3">Připojení k VPN</h3>
+    <h4><small>Není to až tak těžké, jen někdo musí napsat ten návod.</small></h4>
+    <!--<img src="../gate/assets/vpnWinGuide/obr1.png">-->
+  </div>
+  <span>Konfigurace je ke stažení <a href="/gate/vpn"><b>zde</b></a>.</span>
 </div>
 
 <div class="container">
   <h4>1: Nainstujte program OpenVPN</h4>
     <ol>
       <li>
-        V internetovém prohlížeči otevřete stránku <a href="https://openvpn.net/index.php/open-source/downloads.html">stahování OpenVPN</a></li>
-      
+        V internetovém prohlížeči otevřete stránku <a href="https://openvpn.net/index.php/open-source/downloads.html">stahování OpenVPN</a>
+      </li>
       <li>
-	  <?=imageHTML("Na této stránce klikněte na odkaz pro stažení instalačního souboru pro Windows (končí .exe)", 1, 2);?>
-        <!--p>Na této stránce klikněte na odkaz pro stažení instalačního souboru pro Windows (končí .exe) 
-          <a href= "#collapseObr1" data-toggle="collapse">(obrázek)</a></p>
-        <div id="collapseObr1" class="collapse">
-          <button type="button" class="myShit" data-toggle="modal" data-target="#image-closeup" data-id="../gate/assets/vpnWinGuide/obr1.png"> 
-            <img class="img-responsive" src="../gate/assets/vpnWinGuide/obr1.png" alt="" /></button></div-->
-	  </li>
-          
+        <?=imageHTML("Na této stránce klikněte na odkaz pro stažení instalačního souboru pro Windows (končí .exe)", 1)?>
+      </li>
       <li>Otevřete nově stažený program
         <ul>
           <li>
-		  <?=imageHTML("Chrome", 2, 2)?>
-            <!--a href= "#collapseObr2" data-toggle="collapse" role="button">Chrome</a>
-            <div id="collapseObr2" class="collapse">
-              <button type="button" class="myShit" data-toggle="modal" data-target="#image-closeup" data-id="../gate/assets/vpnWinGuide/obr2.png"> 
-                <img class="img-responsive" src="../gate/assets/vpnWinGuide/obr2.png" alt="" /></button></div-->
-				</li>
-          
+            <?=imageHTML("Chrome", 2)?>
+          </li>
           <li>
-		  <?=imageHTML("Mozilla", 3, 2)?>
-            <!--a href="#collapseMozilla" data-toggle="collapse">Mozilla</a>
-            <div id="collapseMozilla" class="collapse">
-              <p><button type="button" class="myShit" data-toggle="modal" data-target="#image-closeup" data-id="../gate/assets/vpnWinGuide/obr3.png">
-                <img class="img-responsive" src="../gate/assets/vpnWinGuide/obr3.png" alt="" /></button></p>
-              <p><button type="button" class="myShit" data-toggle="modal" data-target="#image-closeup" data-id="../gate/assets/vpnWinGuide/obr4.png">
-                <img class="img-responsive" src="../gate/assets/vpnWinGuide/obr4.png" alt="" /></button></p></div-->
-		  </li>
-
+            <?=imageHTML("Mozilla", 3)?>
+          </li>
           <li>
-		  <?=imageHTML("Edge", 4, 2)?>
-            <!--a href= "#collapseObr4" data-toggle="collapse" role="button">Edge</a>
-              <div id="collapseObr4" class="collapse">
-                <button type="button" class="myShit" data-toggle="modal" data-target="#image-closeup" data-id="../gate/assets/vpnWinGuide/obr4.png"> 
-                  <img class="img-responsive" src="../gate/assets/vpnWinGuide/obr4.png" alt="" /></button></div-->
-				  </li>
-
-            
-              
-
+            <?=imageHTML("Edge", 4)?>
+          </li>
     </ol>
 </div>
 
