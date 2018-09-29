@@ -12,7 +12,7 @@
 <body>
 
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-    <h5 class="my-0 font-weight-normal">Textilní Brána</h5>
+    <h5 class="my-0 mr-auto font-weight-normal">Textilní Brána</h5>
     <?php if ($user->isAdmin()):?>
     <div class="progress" style="left: 0;height: 2px;position: absolute;top: 0;width: 100%;">
         <div class="progress-bar" role="progressbar" style="width: 0%;" id="progress_one"></div>
@@ -22,7 +22,7 @@
     <?php if (@$back):?>
     <a class="ml-3 btn btn-outline-primary" href="/gate">🠈 Zpět</a>
     <?php endif;?>
-    <span class="my-0 ml-md-auto mr-md-auto font-weight-normal text-danger font-weight-bold">Tato stránka je dočasná a bude v blízké době nahrazena</span>
+    <!--span class="my-0 ml-md-auto mr-md-auto font-weight-normal text-danger font-weight-bold">Tato stránka je dočasná a bude v blízké době nahrazena</span-->
     <?php if ($user->isLogged()):?>
     <nav class="my-2 my-md-0 mr-md-3">
         <span class="p-2 text-dark" href="#"><?=$user->getUserData()['name']?></span>
